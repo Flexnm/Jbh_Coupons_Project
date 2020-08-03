@@ -1,0 +1,27 @@
+<mat-dialog-content class="mat-typography">
+    <mat-table [dataSource]="couponsSource">
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? allToggle() : null"
+                    [checked]="selectionModel.hasValue() && isAllSelected()"
+                    [indeterminate]="selectionModel.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let coupon">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selectionModel.toggle(coupon) : null"
+                    [checked]="selectionModel.isSelected(coupon)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+        <ng-container [matColumnDef]="column" *ngFor="let column of loopingColumns">
+            <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon[column]}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="cartTableColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: cartTableColumns"></mat-row>
+    </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="purchaseCoupons()">Buy Selected</button>
+</mat-dialog-actions>

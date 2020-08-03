@@ -1,0 +1,59 @@
+<div class="content">
+    <br />
+    <button mat-raised-button (click)="addCoupon()">Add Coupon</button>
+    <br />
+    <mat-form-field>
+        <mat-label>Filter By Price</mat-label>
+        <input matInput type="number" #derp (keyup)="priceFilter($event)">
+    </mat-form-field>
+    <br />
+    <br />
+    <br />
+    <br />
+    <mat-table #coupTable [dataSource]="couponsSource" *ngIf="coupCat">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Coupon ID</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon.id}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Coupon Title</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon.title}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field>
+                    <mat-label>Product Category</mat-label>
+                    <mat-select #catFilter (selectionChange)="categoryFilter(catFilter.value)">
+                        <mat-option value="">All</mat-option>
+                        <mat-option *ngFor="let category of coupCat" [value]="category">{{category}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon.category}}</mat-cell>
+        </ng-container>
+        <ng-container [matColumnDef]="column" *ngFor="let column of couponsTableHeaders">
+            <mat-header-cell *matHeaderCellDef>Coupon {{column}}</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon[column]}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="image">
+            <mat-header-cell *matHeaderCellDef>Coupon Image</mat-header-cell>
+            <mat-cell *matCellDef="let coupon"><img [src]="imageSrcProvider(coupon.image)" alt="No image"></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef>Coupon Data Edit</mat-header-cell>
+            <mat-cell *matCellDef="let coupon"><button mat-raised-button (click)="updateCoupon(coupon)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete Coupon</mat-header-cell>
+            <mat-cell *matCellDef="let coupon"><button mat-raised-button (click)="deleteCoupon(coupon)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="allCouponsTableHeaders"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: allCouponsTableHeaders;"></mat-row>
+    </mat-table>
+</div>

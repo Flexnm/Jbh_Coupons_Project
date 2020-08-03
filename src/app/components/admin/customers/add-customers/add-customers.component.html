@@ -1,0 +1,29 @@
+<form [formGroup]="addCustForm">
+    <mat-form-field>
+        <mat-label>Customer First Name</mat-label>
+        <input matInput type="text" formControlName="cFirstName" />
+        <mat-error *ngIf="fctrl['cFirstName'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Customer Last Name</mat-label>
+        <input matInput type="text" formControlName="cLastName" />
+        <mat-error *ngIf="fctrl['cLastName'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Customer Email</mat-label>
+        <input matInput type="text" formControlName="cEmail" />
+        <mat-error *ngIf="fctrl['cEmail'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Customer Password</mat-label>
+        <input matInput type="text" formControlName="cPassword" />
+        <mat-error *ngIf="fctrl['cPassword'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="addCustomer()">
+        <mat-icon>add_box</mat-icon>
+    </button>
+</form>

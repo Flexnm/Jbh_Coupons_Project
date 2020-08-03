@@ -1,0 +1,54 @@
+<button mat-raised-button (click)="addCompany()">
+    <mat-icon>add_box</mat-icon>
+</button>
+<br />
+<div>table needs to be filterable by id, first name, second name, email</div>
+<mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput type="text" (keyup)="custFilter($event)" />
+</mat-form-field>
+<mat-drawer-container class="content">
+    <mat-drawer class="theDrawer" #couponsList mode="over" position="end" fixedInViewport="true"
+        (click)="couponsList.close()">
+        <span *ngIf="clickedComp">
+            <mat-table [dataSource]="clickedComp._coupons">
+                <ng-container [matColumnDef]="column" *ngFor="let column of couponsTableHeaders">
+                    <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+                    <mat-cell *matCellDef="let coupon">{{coupon[column]}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+                    <mat-cell *matCellDef="let coupon"><img [src]="couponImage(coupon.image)" alt="bad" /></mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="allCouponsTableHeaders"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: allCouponsTableHeaders;"></mat-row>
+            </mat-table>
+        </span>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-table #companiesTable [dataSource]="companiesList">
+            <ng-container [matColumnDef]="column" *ngFor="let column of clickableColumns">
+                <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+                <mat-cell *matCellDef="let company" (click)="couponsList.open(); couponSideDisplay(company.id)">
+                    {{company[column]}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef>Update</mat-header-cell>
+                <mat-cell *matCellDef="let company">
+                    <button mat-raised-button (click)="updateCompany(company)">
+                        <mat-icon>edit</mat-icon>
+                    </button></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                <mat-cell *matCellDef="let company">
+                    <button mat-raised-button (click)="deleteCompany(company)">
+                        <mat-icon>delete</mat-icon>
+                    </button></mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="companiesTableHeaders"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: companiesTableHeaders;"></mat-row>
+        </mat-table>
+    </mat-drawer-content>
+</mat-drawer-container>

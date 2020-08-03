@@ -1,0 +1,23 @@
+<div *ngIf="coupCat" class="page">
+    <div>
+        <br />
+        <mat-form-field>
+            <mat-label>Search By Price</mat-label>
+            <input matInput type="number" #maxPrice>
+        </mat-form-field>
+        <button mat-raised-button (click)="filterStuff('price', maxPrice.value)">Price</button>
+        <br />
+        <mat-form-field>
+            <mat-label>Search By Category</mat-label>
+            <mat-select #catFilter (selectionChange)="filterStuff('category', catFilter.value)">
+                <mat-option value="all">All</mat-option>
+                <mat-option *ngFor="let category of coupCat" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="couponsGrid" class="couponDisplay">
+        <div *ngFor="let c of couponsGrid">
+            <app-coupon [couponItem]="c"></app-coupon>
+        </div>
+    </div>
+</div>

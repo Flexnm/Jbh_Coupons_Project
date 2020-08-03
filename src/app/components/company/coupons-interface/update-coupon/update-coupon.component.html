@@ -1,0 +1,60 @@
+<form [formGroup]="editCoupon" *ngIf="coupCat">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="cTitle" type="text">
+        <mat-error *ngIf="fctrl['cTitle'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="cDescription" type="text">
+        <mat-error *ngIf="fctrl['cDescription'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select matInput #group formControlName="cCategory">
+            <mat-option *ngFor="let category of coupCat;" [value]="category">{{category}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="fctrl['cCategory'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>StartDate</mat-label>
+        <input matInput formControlName="cStartDate" type="date">
+        <mat-error *ngIf="fctrl['cStartDate'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>EndDate</mat-label>
+        <input matInput formControlName="cEndDate" type="date">
+        <mat-error *ngIf="fctrl['cEndDate'].errors?.required">Field cannot be left empty</mat-error>
+        <mat-error *ngIf="fctrl['cEndDate'].errors?.dataEditError">New date is out of date</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="cAmount" type="number">
+        <mat-error *ngIf="fctrl['cAmount'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="cPrice" type="number">
+        <mat-error *ngIf="fctrl['cPrice'].errors?.required">Field cannot be left empty</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <img [src]="fctrl['cImage'].value" alt="No Image" />
+        <br />
+        <button mat-raised-button (click)="cImageInput.click()">Select Image</button>
+        <input hidden #cImageInput type="file" (change)="imageProcess($event.target.files)">
+        <input hidden matInput formControlName="cImage">
+        <mat-error *ngIf="fctrl['cImage'].errors?.required">required</mat-error>
+        <mat-error *ngIf="fctrl['cImage'].errors?.ImageSizeError">Image size out of range</mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="updateCoupon()" [disabled]="!editCoupon.valid">
+        <mat-icon>edit</mat-icon>
+    </button>
+</form>

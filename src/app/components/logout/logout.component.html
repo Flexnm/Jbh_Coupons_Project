@@ -1,0 +1,2 @@
+<button *ngIf="!service.loggedIn" mat-raised-button routerLink="login">login</button>
+<button *ngIf="service.loggedIn" mat-raised-button routerLink="logout" (click)="logout()">Logout</button>

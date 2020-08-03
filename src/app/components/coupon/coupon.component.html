@@ -1,0 +1,36 @@
+<mat-card class="coupon">
+    Expired at {{couponItem._endDate}}
+    <p>
+        <mat-divider></mat-divider>
+    </p>
+    <mat-card-header>
+        <mat-card-title>{{couponItem._title}}</mat-card-title>
+        <mat-card-subtitle>{{couponItem._category}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="cardImg" mat-card-image [src]="couponImage" alt="missing coupon image">
+    <mat-card-content>
+        <div>
+            Description: {{couponItem._companyId}}
+        </div>
+        <p>
+            {{couponItem._description}}
+        </p>
+    </mat-card-content>
+    <mat-card-footer class="spacer">
+        <span>
+            {{couponItem._amount}} left.
+        </span>
+        <span>
+            Price: {{couponItem._price}}
+        </span>
+        <span></span>
+        <mat-card-actions>
+            <button mat-raised-button (click)="cancelPurchase(couponItem)">
+                <mat-icon>cancel</mat-icon>
+            </button>
+            <button mat-raised-button (click)="purchaseCoupon(couponItem)" [disabled]="inCart? true : false">
+                <mat-icon>done_outline</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card-footer>
+</mat-card>

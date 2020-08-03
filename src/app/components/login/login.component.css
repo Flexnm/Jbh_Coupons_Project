@@ -1,0 +1,15 @@
+mat-card{
+    max-width: max-content;
+    position: absolute;
+    top: 18.519%;
+    left: 43.531%;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.mainTools *{
+    padding-left: 10px;
+    padding-right: 10px;
+}

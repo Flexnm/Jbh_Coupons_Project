@@ -1,0 +1,37 @@
+<div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-subtitle>Enter your login details below</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="loginForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>email</mat-label>
+                    <input matInput formControlName="cEmail" type="email">
+                    <mat-error *ngIf="fctrl['cEmail'].errors?.required">required</mat-error>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="outline">
+                    <mat-label>password</mat-label>
+                    <input matInput formControlName="cPassword" type="password">
+                    <mat-error *ngIf="fctrl['cPassword'].errors?.required">required</mat-error>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="outline">
+                    <mat-label>client</mat-label>
+                    <mat-select formControlName="cType" #routeSelector>
+                        <mat-option value="admin">admin</mat-option>
+                        <mat-option value="company">company</mat-option>
+                        <mat-option value="customer">customer</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="fctrl['cType'].errors?.required">required</mat-error>
+                </mat-form-field>
+                <br />
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [disabled]="!loginForm.valid" (click)="login()">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

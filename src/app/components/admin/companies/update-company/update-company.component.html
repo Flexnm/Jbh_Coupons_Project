@@ -1,0 +1,15 @@
+<form [formGroup]="editCompForm">
+    <mat-form-field>
+        <mat-label>Update Company Email</mat-label>
+        <input matInput type="email" formControlName="cEmail" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Update Company Password</mat-label>
+        <input matInput type="text" formControlName="cPassword" />
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="updateCompany(editCompForm.value)">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>

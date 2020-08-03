@@ -1,0 +1,11 @@
+<mat-toolbar color="accent">
+    <mat-toolbar-row *ngIf="myCompany">
+        <mat-icon class="details">business</mat-icon>
+        <span>
+            Company: {{myCompany._name}}
+            <br />
+            Email: {{myCompany._email}}
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

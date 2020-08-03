@@ -1,0 +1,63 @@
+<form [formGroup]="addCouponForm">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="cTitle" type="text">
+        <mat-error *ngIf="fctrl['cTitle'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select matInput #group formControlName="cCategory">
+            <mat-option *ngFor="let category of coupCat" [value]="category">{{category}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="fctrl['cCategory'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="cDescription"></textarea>
+        <mat-error *ngIf="fctrl['cDescription'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>StartDate</mat-label>
+        <input matInput formControlName="cStartDate" type="date">
+        <mat-error *ngIf="fctrl['cStartDate'].errors?.required">required</mat-error>
+        <mat-error *ngIf="fctrl['cStartDate'].errors?.DateError">bad startDate</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>EndDate</mat-label>
+        <input matInput formControlName="cEndDate" type="date">
+        <mat-error *ngIf="fctrl['cEndDate'].errors?.required">required</mat-error>
+        <mat-error *ngIf="fctrl['cEndDate'].errors?.DateError">bad endDate</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="cAmount" type="number">
+        <mat-error *ngIf="fctrl['cAmount'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="cPrice" type="number">
+        <mat-error *ngIf="fctrl['cPrice'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <img *ngIf="fctrl['cImage'].value != ''; else placeholder" [src]="fctrl['cImage'].value" alt="No Image" />
+        <ng-template #placeholder>
+            <img [src]="placeholderImage" alt="No Image" />
+        </ng-template>
+        <br />
+        <button mat-raised-button (click)="cImageInput.click()">Select Image</button>
+        <input hidden #cImageInput type="file" (change)="imageProcess($event.target.files)">
+        <input hidden matInput formControlName="cImage">
+        <mat-error *ngIf="fctrl['cImage'].errors?.required || fctrl['cImage'].errors?.InvalidImage">New image is
+            required</mat-error>
+        <mat-error *ngIf="fctrl['cImage'].errors?.ImageSizeError">Image size out of range</mat-error>
+    </mat-form-field>
+    <br />
+    <br />
+    <button mat-raised-button (click)="addCoupon()" [disabled]="!addCouponForm.valid">
+        <mat-icon>edit</mat-icon>
+    </button>
+</form>

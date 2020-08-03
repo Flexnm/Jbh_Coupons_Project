@@ -1,0 +1,13 @@
+.coupon{
+    max-width: 250px;
+    margin-bottom:30px;
+}
+
+.cardImg{
+    height:256px;
+}
+.spacer{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-left:15px;
+   }

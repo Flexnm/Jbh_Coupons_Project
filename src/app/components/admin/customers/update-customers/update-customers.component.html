@@ -1,0 +1,25 @@
+<form [formGroup]="editCustForm">
+    <mat-form-field>
+        <mat-label>Update Customer First Name</mat-label>
+        <input matInput type="text" formControlName="cFirstName" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Update Customer Last Name</mat-label>
+        <input matInput type="text" formControlName="cLastName" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Update Customer Email</mat-label>
+        <input matInput type="email" formControlName="cEmail" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Update Customer Password</mat-label>
+        <input matInput type="text" formControlName="cPassword" />
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="updateCustomer(editCustForm.value)">
+        <mat-icon>done</mat-icon>
+    </button>
+</form>

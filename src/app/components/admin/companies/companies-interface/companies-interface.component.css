@@ -1,0 +1,19 @@
+.content{
+    height:100%;
+}
+
+.theDrawer{
+    position:fixed;
+    top:30%;
+    height:50%;
+    width:60%; 
+}
+
+img{
+    width:64px;
+    height:64px;
+}
+
+main{
+    width: 100%;
+}

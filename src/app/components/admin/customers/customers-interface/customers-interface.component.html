@@ -1,0 +1,56 @@
+<button mat-raised-button (click)="addCustomer()">
+    <mat-icon>add_circle</mat-icon>
+</button>
+<br />
+<div>table needs to be filterable by id, first name, second name, email</div>
+<mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput type="text" (keyup)="custFilter($event)" />
+</mat-form-field>
+<mat-drawer-container>
+    <mat-drawer #couponsList mode="over" position="end" fixedInViewport="true" (click)="couponsList.close()"
+        class="theDrawer">
+        <span *ngIf="clickedCust">
+            {{clickedCust._firstName}}'s coupons:
+            <mat-table [dataSource]="clickedCust._coupons">
+                <ng-container [matColumnDef]="column" *ngFor="let column of couponsTableHeaders">
+                    <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+                    <mat-cell *matCellDef="let coupon">{{coupon[column]}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+                    <mat-cell *matCellDef="let coupon"><img class="tableImage" [src]="couponImage(coupon.image)"
+                            alt="bad" /></mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="allCouponsTableHeaders"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: allCouponsTableHeaders;"></mat-row>
+            </mat-table>
+        </span>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-table #customersTable [dataSource]="customersList">
+            <ng-container [matColumnDef]="column" *ngFor="let column of clickableColumns">
+                <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+                <mat-cell *matCellDef="let customer" (click)="couponsList.open(); couponSideDisplay(customer.id)">
+                    {{customer[column]}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef>Update</mat-header-cell>
+                <mat-cell *matCellDef="let customer">
+                    <button mat-raised-button (click)="updateCustomer(customer)">
+                        <mat-icon>edit</mat-icon>
+                    </button></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                <mat-cell *matCellDef="let customer">
+                    <button mat-raised-button (click)="deleteCustomer(customer)">
+                        <mat-icon>delete</mat-icon>
+                    </button></mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="customersTableHeaders"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: customersTableHeaders;"></mat-row>
+        </mat-table>
+    </mat-drawer-content>
+</mat-drawer-container>

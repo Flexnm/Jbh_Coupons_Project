@@ -1,0 +1,39 @@
+<br />
+<div>
+    <mat-form-field>
+        <mat-label>Search By Price</mat-label>
+        <input matInput type="number" #priceFilter>
+    </mat-form-field>
+    <button mat-raised-button (click)="filterStuff('price', priceFilter.value)">Filter By Price</button>
+    <button mat-raised-button (click)="priceFilter.value = ''; filterStuff('','')">clear</button>
+    <br />
+    <mat-table #theTable [dataSource]="boughtCoupons" *ngIf="coupCat">
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon.title}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field>
+                    <mat-label>Categories</mat-label>
+                    <mat-select #catFilter (selectionChange)="filterStuff('category', catFilter.value)">
+                        <mat-option value="">All</mat-option>
+                        <mat-option *ngFor="let category of coupCat" [value]="category">{{category}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon.category}}</mat-cell>
+        </ng-container>
+        <ng-container [matColumnDef]="column" *ngFor="let column of couponsTableHeaders">
+            <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+            <mat-cell *matCellDef="let coupon">{{coupon[column]}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="image">
+            <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+            <mat-cell *matCellDef="let coupon"><img class="tableImage" [src]="couponImage(coupon.image)" alt="bad" />
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="allCouponsTableHeaders; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: allCouponsTableHeaders;"></mat-row>
+    </mat-table>
+</div>

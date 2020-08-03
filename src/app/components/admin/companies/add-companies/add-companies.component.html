@@ -1,0 +1,23 @@
+<form [formGroup]="addCompForm">
+    <mat-form-field>
+        <mat-label>Company Name</mat-label>
+        <input matInput type="text" formControlName="cName" />
+        <mat-error *ngIf="fctrl['cName'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Company Email</mat-label>
+        <input matInput type="text" formControlName="cEmail" />
+        <mat-error *ngIf="fctrl['cEmail'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Company Password</mat-label>
+        <input matInput type="text" formControlName="cPassword" />
+        <mat-error *ngIf="fctrl['cPassword'].errors?.required">required</mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button (click)="addCompany()">
+        <mat-icon>add_box</mat-icon>
+    </button>
+</form>

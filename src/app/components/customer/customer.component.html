@@ -1,0 +1,19 @@
+<span *ngIf="customerData">
+    <div class="infoStuff">
+        <mat-toolbar color="accent">
+            <a routerLink="/customer"><button mat-raised-button>Profile</button></a>
+            <a routerLink="purchase"><button mat-raised-button>Browse coupons</button></a>
+        </mat-toolbar>
+        <mat-card>
+            <mat-card-title>{{customerData._firstName}} {{customerData._lastName}}</mat-card-title>
+            <mat-card-content>Your email: {{customerData._email}}</mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="showCart()">See Your Coupons Cart</button>
+                <button mat-raised-button (click)="confirmPurchase()">Confirm Your purchase</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</span>
